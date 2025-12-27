@@ -1,0 +1,50 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card shadow-sm border-0" style="width: 100%; max-width: 400px; background-color: #f8f9fa;">
+    <div class="card-body p-4">
+      <h3 class="text-center mb-4">Prijava</h3>
+
+      <form s>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Elektronska pošta</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            required
+            email
+            placeholder="test@gmail.com">
+          <div class="invalid-feedback">Vnesite veljaven e-naslov.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Geslo</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            required
+            minlength="6"
+            placeholder="Vnesite geslo">
+          <div class="invalid-feedback">Geslo mora imeti vsaj 6 znakov.</div>
+        </div>
+
+        <div class="d-grid gap-2 mt-4">
+          <button
+            type="submit"
+            class="btn btn-dark"
+            >
+            Prijavi se
+          </button>
+        </div>
+
+      </form>
+
+      <div class="text-center mt-3">
+        <small>Še nimate računa? <a  routerLink="/signup" class="text-decoration-none">Registracija</a></small>
+      </div>
+    </div>
+  </div>
+</div>

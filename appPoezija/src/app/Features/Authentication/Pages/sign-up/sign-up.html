@@ -1,0 +1,66 @@
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card shadow-sm border-0" style="width: 100%; max-width: 400px; background-color: #f8f9fa;">
+    <div class="card-body p-4">
+      <h3 class="text-center mb-4">Registracija</h3>
+
+      <form s>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Elektronska pošta</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            required
+            email
+            placeholder="test@gmail.com">
+          <div class="invalid-feedback">Vnesite veljaven e-naslov.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="displayName" class="form-label">Prikazno ime</label>
+          <input
+            type="text"
+            id="displayName"
+            name="displayName"
+            class="form-control"
+            required
+            minlength="3"
+            placeholder="FranceP"
+          >
+          <div class="invalid-feedback">Prikazno ime je obvezno (vsaj 3 znaki).</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label">Geslo</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            required
+            minlength="6"
+            placeholder="Vnesite geslo">
+          <div class="invalid-feedback">Geslo mora imeti vsaj 6 znakov.</div>
+        </div>
+
+
+
+        <div class="d-grid gap-2 mt-4">
+          <button
+            type="submit"
+            class="btn btn-dark"
+            >
+            Registriraj se
+          </button>
+        </div>
+
+      </form>
+
+      <div class="text-center mt-3">
+        <small>Že imate račun? <a routerLink="/login" class="text-decoration-none">Prijava</a></small>
+      </div>
+    </div>
+  </div>
+</div>
