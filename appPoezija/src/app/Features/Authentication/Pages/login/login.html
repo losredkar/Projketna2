@@ -3,8 +3,7 @@
     <div class="card-body p-4">
       <h3 class="text-center mb-4">Prijava</h3>
 
-      <form s>
-
+      <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" novalidate>
         <div class="mb-3">
           <label for="email" class="form-label">Elektronska pošta</label>
           <input
@@ -14,6 +13,9 @@
             class="form-control"
             required
             email
+            ngModel
+            #emailModel="ngModel"
+            [class.is-invalid]="emailModel.invalid && emailModel.touched"
             placeholder="test@gmail.com">
           <div class="invalid-feedback">Vnesite veljaven e-naslov.</div>
         </div>
@@ -27,6 +29,9 @@
             class="form-control"
             required
             minlength="6"
+            ngModel
+            #passModel="ngModel"
+            [class.is-invalid]="passModel.invalid && passModel.touched"
             placeholder="Vnesite geslo">
           <div class="invalid-feedback">Geslo mora imeti vsaj 6 znakov.</div>
         </div>
@@ -35,6 +40,7 @@
           <button
             type="submit"
             class="btn btn-dark"
+            [disabled]="loginForm.invalid"
             >
             Prijavi se
           </button>
