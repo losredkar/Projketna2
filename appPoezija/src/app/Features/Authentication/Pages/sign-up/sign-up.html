@@ -3,7 +3,7 @@
     <div class="card-body p-4">
       <h3 class="text-center mb-4">Registracija</h3>
 
-      <form s>
+      <form (ngSubmit)="onSubmit(regForm)" #regForm="ngForm">
 
         <div class="mb-3">
           <label for="email" class="form-label">Elektronska pošta</label>
@@ -12,6 +12,9 @@
             id="email"
             name="email"
             class="form-control"
+            [(ngModel)]="user.email"
+            #emailRef="ngModel"
+            [ngClass]="{'is-invalid': emailRef.invalid && (emailRef.touched || regForm.submitted)}"
             required
             email
             placeholder="test@gmail.com">
@@ -25,10 +28,12 @@
             id="displayName"
             name="displayName"
             class="form-control"
+            [(ngModel)]="user.name"
+            #nameRef="ngModel"
+            [ngClass]="{'is-invalid': nameRef.invalid && (nameRef.touched || regForm.submitted)}"
             required
             minlength="3"
-            placeholder="FranceP"
-          >
+            placeholder="FranceP">
           <div class="invalid-feedback">Prikazno ime je obvezno (vsaj 3 znaki).</div>
         </div>
 
@@ -39,21 +44,26 @@
             id="password"
             name="password"
             class="form-control"
+            [(ngModel)]="user.pass"
+            #passRef="ngModel"
+            [ngClass]="{'is-invalid': passRef.invalid && (passRef.touched || regForm.submitted)}"
             required
             minlength="6"
             placeholder="Vnesite geslo">
           <div class="invalid-feedback">Geslo mora imeti vsaj 6 znakov.</div>
         </div>
 
-
-
         <div class="d-grid gap-2 mt-4">
           <button
             type="submit"
             class="btn btn-dark"
-            >
+            [disabled]="regForm.invalid">
             Registriraj se
           </button>
+        </div>
+
+        <div *ngIf="errorMsg" class="alert alert-danger mt-3 py-2 small text-center">
+          {{ errorMsg }}
         </div>
 
       </form>

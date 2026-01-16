@@ -10,6 +10,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './Core/Interceptors/auth-interceptor';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { Home } from './Features/Home/pages/home/home';
+import { Add } from './Features/Home/pages/add/add/add';
+import { PoemCard } from './Shared/Components/poem/poem-card/poem-card';
 @NgModule({
   declarations: [
     App,
@@ -17,6 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
     Header,
     Login,
     SignUp,
+    Home,
+    Add,
+    PoemCard,
   ],
   imports: [
     BrowserModule,

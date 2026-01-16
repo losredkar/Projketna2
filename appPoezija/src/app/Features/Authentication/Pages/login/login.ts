@@ -32,7 +32,7 @@ export class Login {
       next: (response) => {
         console.log('Prijava uspešna!', response);
         // ce pridemo do sem je prijava uspesna && preusmeri na domaco stran TODO
-        this.router.navigate(['/signup']);
+        this.router.navigate(['/home']);
       },
       // izpisi napako
       error: (err) => {

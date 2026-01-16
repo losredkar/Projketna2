@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
+import { Auth } from '../Services/auth';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  constructor(private authSerivce: Auth){}
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = localStorage.getItem('supabase_token'); // je v lokalni shrambi brksalnika ue jwt zeton ki ga shrani auth service ob prijavi
 
@@ -15,8 +18,18 @@ const authReq = request.clone({
   }
 });
 
-    // posredujemo supabase zahtevek
-    return next.handle(authReq);
+    // posredujemo supabase zahtevek in ujamemo napako ce npr potece zeton, potem odjavimo ce potece
+    return next.handle(authReq).pipe(
+      catchError((error: HttpErrorResponse) => {
+        // Če baza vrne 401 (Unauthorized), pomeni, da je žeton potekel, odjavimo uporabnika
+        if (error.status === 401) {
+          console.warn('Žeton je neveljaven ali potekel. Odjavljam uporabnika...');
+
+          this.authSerivce.logout();
+        }
+        return throwError(() => error);
+      })
+    );;
   }
 }
 
