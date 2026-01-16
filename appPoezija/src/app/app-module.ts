@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { Home } from './Features/Home/pages/home/home';
 import { Add } from './Features/Home/pages/add/add/add';
-import { PoemCard } from './Shared/Components/poem/poem-card/poem-card';
+import { Userstats } from './Features/Home/pages/userstats/userstats/userstats';
 @NgModule({
   declarations: [
     App,
@@ -22,7 +22,8 @@ import { PoemCard } from './Shared/Components/poem/poem-card/poem-card';
     SignUp,
     Home,
     Add,
-    PoemCard,
+    Userstats
+
   ],
   imports: [
     BrowserModule,

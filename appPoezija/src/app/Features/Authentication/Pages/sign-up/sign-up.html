@@ -17,6 +17,7 @@
             [ngClass]="{'is-invalid': emailRef.invalid && (emailRef.touched || regForm.submitted)}"
             required
             email
+            [class.is-valid]="emailRef.valid && emailRef.touched"
             placeholder="test@gmail.com">
           <div class="invalid-feedback">Vnesite veljaven e-naslov.</div>
         </div>
@@ -33,6 +34,7 @@
             [ngClass]="{'is-invalid': nameRef.invalid && (nameRef.touched || regForm.submitted)}"
             required
             minlength="3"
+            [class.is-valid]="nameRef.valid && nameRef.touched"
             placeholder="FranceP">
           <div class="invalid-feedback">Prikazno ime je obvezno (vsaj 3 znaki).</div>
         </div>
@@ -49,6 +51,7 @@
             [ngClass]="{'is-invalid': passRef.invalid && (passRef.touched || regForm.submitted)}"
             required
             minlength="6"
+            [class.is-valid]="passRef.valid && passRef.touched"
             placeholder="Vnesite geslo">
           <div class="invalid-feedback">Geslo mora imeti vsaj 6 znakov.</div>
         </div>
@@ -62,9 +65,16 @@
           </button>
         </div>
 
-        <div *ngIf="errorMsg" class="alert alert-danger mt-3 py-2 small text-center">
+        @if (errorMsg) {
+        <div class="alert alert-danger mt-3 py-2 small text-center">
           {{ errorMsg }}
-        </div>
+         </div>
+        }
+        @if(successMsg) {
+          <div class="alert alert-success mt-3 py-2 small text-center">
+          {{ successMsg }}
+         </div>
+        }
 
       </form>
 

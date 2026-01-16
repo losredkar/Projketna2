@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Home }from '../../../../Features/Home/pages/home/home';
-import { PoemCard } from './poem-card';
 
-describe('PoemCard', () => {
-  let component: PoemCard;
-  let fixture: ComponentFixture<PoemCard>;
+import { Userstats } from './userstats';
+
+describe('Userstats', () => {
+  let component: Userstats;
+  let fixture: ComponentFixture<Userstats>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PoemCard]
+      declarations: [Userstats]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PoemCard);
+    fixture = TestBed.createComponent(Userstats);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

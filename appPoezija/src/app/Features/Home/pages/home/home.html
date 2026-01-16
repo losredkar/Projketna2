@@ -4,32 +4,51 @@
     <button class="btn btn-primary" routerLink="/add">Nova poezija +</button>
   </div>
 
+  <!-->
+  <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" id="myPoemsFilter" [(ngModel)]="onlyMyPoems">
+    <label class="form-check-label" for="myPoemsFilter">
+      Prikaži samo moje objave
+    </label>
+  </div>
+  <p></p>
+  <-->
 
-    <div class="form-check form-switch">
-      <input class="form-check-input" type="checkbox" id="myPoemsFilter" [(ngModel)]="onlyMyPoems">
-      <label class="form-check-label " for="myPoemsFilter">
-        Prikaži samo moje objave
-      </label>
-    </div>
-    <p></p>
+  <app-userstats
+    [stevilka]="mojePoezije.length"
+    (state)="onlyMyPoems = $event"
+    >
+  </app-userstats>
 
   <div class="row">
-    <ng-container *ngFor="let poem of poems">
-      <div class="col-12 col-md-6 col-lg-4 mb-4" *ngIf="!onlyMyPoems || poem.user_id === currentUserId">
-        <div class="card h-100 shadow-sm" [ngClass]="{'my-poem-background': poem.user_id === currentUserId}">
-          <div class="card-body">
-            <h5 class="card-title">{{ poem.title }}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Avtor: {{ poem.author_name }}</h6>
-            <hr>
-            <p class="card-text text-center italic">"{{ poem.content }}"</p>
-          </div>
+    @for (poem of poems; track poem.id) {
 
-          <div class="card-footer text-end" *ngIf="poem.user_id === currentUserId">
-            <span class="badge bg-primary me-2">Tvoja objava</span>
-            <button class="btn btn-danger btn-sm " (click)="onDelete(poem.id)" title="Izbriši poezijo">Izbriši</button>
+      @if (!onlyMyPoems || poem.user_id === currentUserId) {
+        <div class="col-12 col-md-6 col-lg-4 mb-4">
+          <div class="card h-100 shadow-sm" [ngClass]="{'my-poem-background': poem.user_id === currentUserId}">
+            <div class="card-body">
+              <h5 class="card-title">{{ poem.title }}</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Avtor: {{ poem.author_name }}</h6>
+              <hr>
+              <p class="card-text text-center italic">"{{ poem.content }}"</p>
+            </div>
+
+            @if (poem.user_id === currentUserId) {
+              <div class="card-footer text-end">
+                <span class="badge bg-primary me-2">Tvoja objava</span>
+                <button class="btn btn-danger btn-sm" (click)="onDelete(poem.id)" title="Izbriši poezijo">
+                  Izbriši
+                </button>
+              </div>
+            }
           </div>
         </div>
+      }
+
+    } @empty {
+      <div class="col-12">
+        <p class="text-muted">Ni vnosov poezij.</p>
       </div>
-    </ng-container>
+    }
   </div>
 </div>

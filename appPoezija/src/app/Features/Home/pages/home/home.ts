@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/cor
 import { Poem } from '../../../../Core/Services/poem';
 import { Auth } from '../../../../Core/Services/auth';
 import { Subscription } from 'rxjs';
+import { Userstats } from '../userstats/userstats/userstats';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ export class Home implements OnInit, OnDestroy {
   currentUserEmail: string | null = null;
   currentUserDisplayName: string | null = null;
   onlyMyPoems: boolean = false;
+  //parentNumOfPoems = this.poems.filter(poem => poem.user_id === this.currentUserId).length;
 
   // Upravljanje z naročninami (da ne povzročamo memory leak-ov)
   private subscriptions: Subscription = new Subscription();
@@ -24,6 +26,10 @@ export class Home implements OnInit, OnDestroy {
     private authService: Auth
   ) {
     console.log('KONSTRUKTOR: Home komponenta se inicializira.');
+  }
+  get mojePoezije() {
+    // filtira, da pokaze samo poezije z trenutnim userjem
+    return this.poems.filter(poem => poem.user_id === this.currentUserId);
   }
 
   ngOnInit(): void {

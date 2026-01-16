@@ -1,0 +1,18 @@
+<div class="card shadow-sm border-0 mb-4 w-100" style="background-color: #f8f9fa; border-radius: 12px;">
+  <div class="card-body p-4 text-center">
+    <h5 class="text-uppercase ls-wide text-muted mb-2" style=" letter-spacing: 1px;">
+      Število mojih objav:
+    </h5>
+
+    <div class="py-2">
+      <span class="display-5 fw-bold text-dark">{{ stevilka }}</span>
+    </div>
+
+    <hr class="my-3 opacity-25" style="max-width: 200px; margin: 0 auto;">
+  <div class="form-check form-switch d-inline-block">
+      <input class="form-check-input" type="checkbox" id="filterSwitch"
+             (change)="onToggle($event)">
+      <label class="form-check-label medium" for="filterSwitch">Prikaži samo moje objave</label>
+    </div>
+  </div>
+</div>

@@ -16,12 +16,15 @@ user = {
   };
 
   confirmed = false;
+  //prikaze obestilu v html pod gumbom ce je ok al ne signup
   errorMsg: string | null = null;
-
+  successMsg: string | null = null;
   constructor(private authService: Auth, private router: Router) {}
 
   onSubmit(form: NgForm) {
     console.log("Klik na registracijo")
+    this.errorMsg = null;
+    this.successMsg = null;
     if (form.valid) {
       const credentials = {
         email: this.user.email,
@@ -32,12 +35,18 @@ user = {
       this.authService.signup(credentials).subscribe({
         next: (res) => {
           console.log('Registracija uspela!')
-
-          alert('Registracija uspela!');
-          this.router.navigate(['/login']);
+          this.successMsg = 'Registracija uspela! Preusmerjanje na login...';
+          //alert('Registracija uspela!');
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 2000);
         },
         error: (err) => {
-          this.errorMsg = 'Napaka pri registraciji.';
+          if (err.error && err.error.msg) {
+            this.errorMsg = err.error.msg; // npr. "User already registered"
+          } else {
+            this.errorMsg = 'Prišlo je do nepredvidene napake. Poskusite znova.';
+          }
           console.log('Napaka pri registraciji.')
 
         }
