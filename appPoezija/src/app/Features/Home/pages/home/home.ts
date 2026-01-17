@@ -75,7 +75,7 @@ export class Home implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
   onDelete(id: number) {
-    if (confirm('Ali si prepričan, da želiš izbrisati to poezijo?')) {
+    if (confirm('Ali ste prepričani, da želite izbrisati to poezijo?')) {
       this.poemService.deletePoem(id).subscribe({
         next: () => console.log('Izbrisano'),
         error: (err) => alert('Napaka pri brisanju: ' + err.message)

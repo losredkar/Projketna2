@@ -33,7 +33,9 @@ export class Poem {
    * Dodajanje nove poezije
    */
   addPoem(poemData: { title: string; content: string; author_name: string; user_id: string }): Observable<any> {
-    return this.http.post(this.apiUrl, poemData);
+    return this.http.post(this.apiUrl, poemData).pipe(
+      tap(() => this.getPoems()) // takojsna posodobitev elementov na home page-u
+    );
   }
 
   deletePoem(id: number): Observable<any> {
